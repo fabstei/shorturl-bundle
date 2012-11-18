@@ -1,0 +1,6 @@
+<form action="{{ path('fabstei_shorturl_url_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form) }}
+    <button type="submit">{% trans %}fabstei_shorturl.save{% endtrans %}</button>
+    <a href="{{ path('fabstei_shorturl_url_delete', { 'id': entity.id }) }}">{% trans %}fabstei_shorturl.delete{% endtrans %}</a>
+    <a href="{{ path('fabstei_shorturl_url_show', { 'id': entity.id }) }}">{% trans %}fabstei_shorturl.back-to-redirects{% endtrans %}</a>
+</form>

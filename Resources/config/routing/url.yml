@@ -1,0 +1,31 @@
+fabstei_shorturl_url:
+    pattern:  /url-manager
+    defaults: { _controller: fabstei_shorturl.url:indexAction }
+
+fabstei_shorturl_url_new:
+    pattern:  /url-manager/new
+    defaults: { _controller: fabstei_shorturl.url:newAction }
+
+fabstei_shorturl_url_show:
+    pattern:  /url-manager/show/{id}
+    defaults: { _controller: fabstei_shorturl.url:showAction }
+
+fabstei_shorturl_url_create:
+    pattern:  /url-manager/create
+    defaults: { _controller: fabstei_shorturl.url:createAction }
+    requirements:
+        _method:  POST
+
+fabstei_shorturl_url_update:
+    pattern:  /url-manager/update/{id}
+    defaults: { _controller: fabstei_shorturl.url:updateAction }
+    requirements:
+        _method:  POST
+
+fabstei_shorturl_url_delete:
+    pattern:  /url-manager/delete/{id}
+    defaults: { _controller: fabstei_shorturl.url:deleteAction }
+
+fabstei_shorturl_url_edit:
+    pattern:  /url-manager/edit/{id}
+    defaults: { _controller: fabstei_shorturl.url:editAction }

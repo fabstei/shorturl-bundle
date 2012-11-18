@@ -1,0 +1,24 @@
+services:
+    fabstei_shorturl.url:
+        class: %fabstei_shorturl.url_controller%
+        arguments: [@request, @session, @router, @doctrine.orm.entity_manager, @templating, @form.factory, @translator, @security.context, @security.acl.provider, @fabstei_shorturl.tokenizer, @fabstei_shorturl.url_entity, %fabstei_shorturl.role_admin%]
+        scope: request
+
+    fabstei_shorturl.redirect:
+        class: %fabstei_shorturl.redirect_class%
+        arguments: [@request, @router, @doctrine.orm.entity_manager, @translator, @fabstei_shorturl.tokenizer, @fabstei_shorturl.url_entity]
+        scope: request
+
+    fabstei_shorturl.url_entity:
+        class: %fabstei_shorturl.url_class%
+
+    fabstei_shorturl.tokenizer:
+        class: %fabstei_shorturl.tokenizer_class%
+        arguments: [%fabstei_shorturl.codeset%]
+
+    token.listener:
+        class: Fabstei\ShorturlBundle\Listener\Tokenizer
+        arguments: [@fabstei_shorturl.tokenizer]
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postUpdate }

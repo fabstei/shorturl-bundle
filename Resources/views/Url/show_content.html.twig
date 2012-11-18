@@ -1,0 +1,33 @@
+<table>
+    <tbody>
+        <tr>
+            <th>{% trans %}fabstei_shorturl.id{% endtrans %}</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}fabstei_shorturl.token{% endtrans %}</th>
+            <td>{{ entity.token }}</td>
+        </tr>
+        {% if entity.url is not null %}
+        <tr>
+            <th>{% trans %}fabstei_shorturl.targeturl{% endtrans %}</th>
+            <td><a href="{{ entity.url }}">{{ entity.url }}</a></td>
+        </tr>
+        {% endif %}
+        <tr>
+            <th>{% trans %}fabstei_shorturl.createdby{% endtrans %}</th>
+            <td>{{ entity.user }}</td>
+        </tr>
+        <tr>
+            <th>{% trans %}fabstei_shorturl.createdon{% endtrans %}</th>
+            <td>{{ entity.datetime|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<form action="{{ path('fabstei_shorturl_url_delete', { 'id': entity.id }) }}" method="post">
+    {{ form_widget(delete_form) }}
+    <a href="{{ path('fabstei_shorturl_url_edit', { 'id': entity.id }) }}"> {% trans %}fabstei_shorturl.edit{% endtrans %}</a>
+    <button type="submit">{% trans %}fabstei_shorturl.delete{% endtrans %}</button>
+    <a href="{{ path('fabstei_shorturl_url') }}"> {% trans %}fabstei_shorturl.back-to-redirects{% endtrans %}</a>
+</form>

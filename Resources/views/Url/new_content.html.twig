@@ -1,0 +1,9 @@
+<form action="{{ path('fabstei_shorturl_url_create') }}" method="post" {{ form_enctype(form) }} >
+    <fieldset>
+        <legend>{% trans %}fabstei_shorturl.redirection.add{% endtrans %}</legend>
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </fieldset>
+    <button type="submit">{% trans %}fabstei_shorturl.add{% endtrans %}</button>
+    <p><a href="{{ path('fabstei_shorturl_url') }}">{% trans %}fabstei_shorturl.back-to-redirects{% endtrans %}</a></p>
+</form>
