@@ -5,13 +5,6 @@ namespace Fabstei\ShorturlBundle\Model;
 interface UserInterface
 {
     /**
-     * Reference to the Url entity
-     *
-     * @return integer
-     */
-    protected $urls;
-
-    /**
      * Get id
      *
      * @return integer
