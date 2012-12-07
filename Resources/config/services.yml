@@ -1,16 +1,22 @@
 services:
     fabstei_shorturl.url:
         class: %fabstei_shorturl.url_controller%
-        arguments: [@request, @session, @router, @doctrine.orm.entity_manager, @templating, @form.factory, @translator, @security.context, @security.acl.provider, @fabstei_shorturl.tokenizer, @fabstei_shorturl.url_entity, %fabstei_shorturl.role_admin%]
+        arguments: [@request, @session, @router, @doctrine.orm.entity_manager, @fabstei_shorturl.manager, @templating, @form.factory, @translator, @security.context, @security.acl.provider, %fabstei_shorturl.role_admin%]
         scope: request
+
+    fabstei_shorturl.manager:
+        class: %fabstei_shorturl.url_manager_class%
+        arguments: [@fabstei_shorturl.manager.doctrine_om, %fabstei_shorturl.url_class%]
+
+    fabstei_shorturl.manager.doctrine_om:
+        class: Doctrine\ORM\EntityManager
+        factory_service: doctrine
+        factory_method: getManager
 
     fabstei_shorturl.redirect:
         class: %fabstei_shorturl.redirect_class%
-        arguments: [@request, @router, @doctrine.orm.entity_manager, @translator, @fabstei_shorturl.tokenizer, @fabstei_shorturl.url_entity]
+        arguments: [@request, @router, @doctrine.orm.entity_manager, @translator, @fabstei_shorturl.manager]
         scope: request
-
-    fabstei_shorturl.url_entity:
-        class: %fabstei_shorturl.url_class%
 
     fabstei_shorturl.tokenizer:
         class: %fabstei_shorturl.tokenizer_class%

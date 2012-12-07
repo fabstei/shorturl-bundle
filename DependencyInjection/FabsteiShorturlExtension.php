@@ -34,6 +34,7 @@ class FabsteiShorturlExtension extends Extension
         $container->setParameter('fabstei_shorturl.redirect_class', $config['redirect_class']);
         $container->setParameter('fabstei_shorturl.codeset', $config['codeset']);
         $container->setParameter('fabstei_shorturl.url_class', $config['url_class']);
+        $container->setParameter('fabstei_shorturl.url_manager_class', $config['url_manager_class']);
         $container->setParameter('fabstei_shorturl.tokenizer_class', $config['tokenizer_class']);
         $container->setParameter('fabstei_shorturl.role_admin', $config['role_admin']);
     }
