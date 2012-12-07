@@ -13,7 +13,7 @@ use Fabstei\ShorturlBundle\Model\UserInterface;
 /**
  * Fabstei\ShorturlBundle\Entity\Url
  *
- * @ORM\Table()
+ * @ORM\Table(name="fabstei_shorturl")
  * @ORM\Entity(repositoryClass="Fabstei\ShorturlBundle\Entity\UrlRepository")
  * @UniqueEntity("token")
  */
