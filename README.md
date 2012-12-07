@@ -2,6 +2,8 @@
 
 *By Fabian Steiner*
 
+> Note: This bundle is under development. Things will change and might break.
+
 ## About
 This Bundle allows you to
 
@@ -54,3 +56,9 @@ The bundles ships with few unit tests and a ``phpunit.xml.dist`` file.
 - [doctrine/orm](https://packagist.org/packages/doctrine/orm)
 - [symfony/framework-bundle](https://packagist.org/packages/symfony/framework-bundle)
 - [gedmo/doctrine-extensions](https://packagist.org/packages/gedmo/doctrine-extensions)
+
+## Credits
+- [Jonathan Snook](http://snook.ca/archives/php/url-shortener) for the base class.
+- [Tim Nagel](https://github.com/merk) for help on IRC and code samples.
+- [FriendsOfSymfony](https://github.com/FriendsOfSymfony/) for the best code to learn from; [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) for the object manager.
+
