@@ -23,9 +23,8 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 use Doctrine\ORM\EntityManager;
 
-use Fabstei\ShorturlBundle\Service\TokenizerInterface;
 use Fabstei\ShorturlBundle\Model\UrlInterface;
-use Fabstei\ShorturlBundle\Entity\Url;
+use Fabstei\ShorturlBundle\Model\UrlManagerInterface;
 use Fabstei\ShorturlBundle\Form\UrlType;
 
 /**
@@ -38,41 +37,37 @@ class UrlController
     protected $session;
     protected $router;
     protected $em;
+    protected $manager;
     protected $template;
     protected $form;
     protected $translator;
     protected $security;
     protected $aclprovider;
-    protected $tokenizer;
-    protected $ec;
     protected $adminRole;
 
     public function __construct(Request                   $request,
                                 SessionInterface          $session,
                                 RouterInterface           $router,
                                 EntityManager             $entityManager,
-                                EngineInterface            $templateEngine,
+                                UrlManagerInterface       $urlManager,
+                                EngineInterface           $templateEngine,
                                 FormFactoryInterface      $formFactory,
                                 TranslatorInterface       $translator,
                                 SecurityContextInterface  $securityContext,
                                 AclProviderInterface      $aclprovider,
-                                TokenizerInterface        $tokenizer,
-                                UrlInterface              $entityClass,
                                                           $adminRole
                                 )
     {
         $this->request     = $request;
         $this->session     = $session;
         $this->router      = $router;
+        $this->manager     = $urlManager;
         $this->em          = $entityManager;
         $this->template    = $templateEngine;
         $this->form        = $formFactory;
         $this->translator  = $translator;
         $this->security    = $securityContext;
         $this->aclprovider = $aclprovider;
-
-        $this->tokenizer   = $tokenizer;
-        $this->ec          = $entityClass;
         $this->adminRole   = $adminRole;
     }
 
@@ -82,7 +77,7 @@ class UrlController
      */
     public function newAction()
     {
-        $entity = new Url();
+        $entity = $this->manager->createUrl();
         $form   = $this->form->create(new UrlType(), $entity);
 
         return $this->template->renderResponse('FabsteiShorturlBundle:Url:new.html.twig',
@@ -94,12 +89,12 @@ class UrlController
     }
 
     /**
-     * Finds and displays a Url entity.
+     * Finds and displays an Url entity.
      *
      */
     public function showAction($id)
     {
-        $entity = $this->em->getRepository($this->ec)->find($id);
+        $entity = $this->manager->findUrlById($id);
 
         if (!$entity) {
             throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.entity_404'));
@@ -127,7 +122,7 @@ class UrlController
      */
     public function createAction()
     {
-        $entity  = new Url();
+        $entity  = $this->manager->createUrl();
         $form    = $this->form->create(new UrlType(), $entity);
         $form->bindRequest($this->request);
 
@@ -137,8 +132,7 @@ class UrlController
 
             $entity->setUser($user);
 
-            $this->em->persist($entity);
-            $this->em->flush();
+            $this->manager->updateUrl($entity);
 
             // creating the ACL
             $aclProvider = $this->aclprovider;
@@ -173,7 +167,7 @@ class UrlController
      */
     public function editAction($id)
     {
-        $entity = $this->em->getRepository($this->ec)->find($id);
+        $entity = $this->manager->findUrlById($id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unable to find Url entity.');
@@ -203,7 +197,7 @@ class UrlController
      */
     public function updateAction($id)
     {
-        $entity = $this->em->getRepository($this->ec)->find($id);
+        $entity = $this->manager->findUrlById($id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unable to find Url entity.');
@@ -221,8 +215,7 @@ class UrlController
         $editForm->bindRequest($this->request);
 
         if ($editForm->isValid()) {
-            $this->em->persist($entity);
-            $this->em->flush();
+            $this->manager->updateUrl($entity);
 
             $this->session->getFlashBag()->add('success', $this->translator->trans('fabstei_shorturl.redirection.updated'));
 
@@ -244,7 +237,7 @@ class UrlController
      */
     public function deleteAction($id)
     {
-        $entity = $this->em->getRepository($this->ec)->find($id);
+        $entity = $this->manager->findUrlById($id);
 
         if (!$entity) {
             throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.entity_404'));
@@ -256,8 +249,7 @@ class UrlController
             return new RedirectResponse($this->router->generate('fabstei_shorturl_url'));
         }
 
-        $this->em->remove($entity);
-        $this->em->flush();
+        $this->manager->deleteUrl($entity);
 
         $this->session->getFlashBag()->add('success', $this->translator->trans('fabstei_shorturl.redirection.deleted', array('%id%' => $id)));
 
@@ -277,7 +269,7 @@ class UrlController
      */
     public function indexAction()
     {
-        $entities = $this->em->getRepository($this->ec)->findAll();
+        $entities = $this->manager->findUrls();
         $view = array('entities' => $entities);
 
         return $this->template->renderResponse('FabsteiShorturlBundle:Url:index.html.twig',

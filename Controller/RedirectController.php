@@ -11,39 +11,38 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Doctrine\ORM\EntityManager;
 
 use Fabstei\ShorturlBundle\Model\UrlInterface;
-use Fabstei\ShorturlBundle\Service\TokenizerInterface;
+use Fabstei\ShorturlBundle\Model\UrlManagerInterface;
 
 class RedirectController
 {
     protected $request;
     protected $router;
-    protected $doctrine;
+    protected $em;
+    protected $translator;
+    protected $manager;
 
     public function __construct(Request             $request,
                                 RouterInterface     $router,
                                 EntityManager       $entityManager,
                                 TranslatorInterface $translator,
-                                TokenizerInterface  $tokenizer,
-                                UrlInterface        $entityClass
+                                UrlManagerInterface $urlManager
                                 )
     {
         $this->request     = $request;
         $this->router      = $router;
         $this->em          = $entityManager;
         $this->translator  = $translator;
-
-        $this->tokenizer   = $tokenizer;
-        $this->ec          = $entityClass;
+        $this->manager     = $urlManager;
     }
 
     public function redirectAction($token)
     {
-        $entity = $this->em->getRepository($this->ec)->findOneByToken($token);
+        $entity = $this->manager->findUrlByToken($token);
 
-        if (!$entity) {
-            if (!$entity->getUrl()) {
-                throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.redirect.404-url_token_id', array('%token%' => $token, '%id%' => $id)));
-            } else {
+        if ($entity) {
+           if (!$entity->getUrl()) {
+                throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.redirect.404-url_token_id', array('%token%' => $token)));
+           } else {
 
                 $url = $entity->getUrl();
 
@@ -54,7 +53,7 @@ class RedirectController
                 return new RedirectResponse($url, 301);
             }
         } else {
-            throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.redirect.404-url_token_id', array('%token%' => $token, '%id%' => $id)));
+            throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.redirect.404-url_token_id', array('%token%' => $token)));
         }
     }
 }
