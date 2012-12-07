@@ -14,11 +14,11 @@ class CodesetCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-        ->setName('fabstei:shorturl:codeset')
+        ->setName('fabstei:token:codeset')
         ->setDefinition(array())
         ->setDescription('Return the codeset used.')
-        ->setHelp('The <info>fabstei:shorturl:codeset</info> command returns the codeset used:
-            <info>./symfony fabstei:shorturl:codeset</info>');
+        ->setHelp('The <info>fabstei:token:codeset</info> command returns the codeset used:
+            <info>./symfony fabstei:token:codeset</info>');
     }
 
     /**

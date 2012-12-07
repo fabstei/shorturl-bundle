@@ -15,11 +15,11 @@ class DecodeCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-        ->setName('fabstei:shorturl:decode')
+        ->setName('fabstei:token:decode')
         ->setDefinition(array(new InputArgument('token', InputArgument::REQUIRED, 'Token to be decoded.')))
         ->setDescription('Calculate an integer from a token.')
-        ->setHelp('The <info>fabstei:shorturl:decode</info> command calculates the integer from a token:
-            <info>./symfony fabstei:shorturl:decode</info> token');
+        ->setHelp('The <info>fabstei:token:decode</info> command calculates the integer from a token:
+            <info>./symfony fabstei:token:decode</info> token');
     }
 
     /**

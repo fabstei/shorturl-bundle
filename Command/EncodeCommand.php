@@ -15,11 +15,11 @@ class EncodeCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-        ->setName('fabstei:shorturl:encode')
+        ->setName('fabstei:token:encode')
         ->setDefinition(array(new InputArgument('integer', InputArgument::REQUIRED, 'Integer to be encoded.')))
         ->setDescription('Calculate a token from an integer.')
-        ->setHelp('The <info>fabstei:shorturl:encode</info> command creates a token from an integer:
-            <info>./symfony fabstei:shorturl:encode</info> integer');
+        ->setHelp('The <info>fabstei:token:encode</info> command creates a token from an integer:
+            <info>./symfony fabstei:token:encode</info> integer');
     }
 
     /**
