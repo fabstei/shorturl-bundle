@@ -1,0 +1,3 @@
+fabstei_shorturl_redirect:
+    pattern:  /{token}/
+    defaults: { _controller: fabstei_shorturl.redirect:redirectAction }
