@@ -2,7 +2,7 @@
 
 *By Fabian Steiner*
 
-> Note: This bundle is under development. Things will change and might break.
+> Note: This bundle is under development. Things will change and might break. [Feedback](https://github.com/fabstei/shorturl-bundle/issues) is very welcome!
 
 ## About
 This Bundle allows you to
@@ -39,6 +39,45 @@ Create a User class implementing the Userinterface and configure it in your conf
             resolve_target_entities:
                 Fabstei\ShorturlBundle\Model\UserInterface: Acme\Bundle\TestBundle\Entity\User #Your custom class
 
+Import the routes:
+
+    # Redirection from short to long urls
+    redirect:
+        resource: "@FabsteiShorturlBundle/Resources/config/routing/redirect.yml"
+        # Set an optional [hostname pattern](http://symfony.com/doc/master/components/routing/hostname_pattern.html) to match (new in Symfony 2.2)
+        #hostname_pattern: example.com
+
+    # Shorturl management
+    shorturl:
+        resource: "@FabsteiShorturlBundle/Resources/config/routing/url.yml"
+
+## Configuration
+
+The bundle provides sensible default values but one might want to customize the codeset used to generate unique tokens (used as short urls).
+
+    fabstei_shorturl:
+        codeset: abcABC123-_! # Default: abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ23456789
+
+## Usage
+
+The bundle comes with two services:
+* fabstei_shorturl.tokenizer to generate tokens to use as short urls (such as example.com/a3x)
+* fabstei_shorturl.manager   to manage redirections (store long urls and their associated token)
+
+It also provides a controller to handle redirections as well as a controller, views and forms to manage the redirections.
+
+Both services are also accessible via cli commands:
+
+    php app/console fabstei:shorturl:add    # Add a long url, returns the short token
+    php app/console fabstei:shorturl:get    # Retrieve a long url associated with a token
+    php app/console fabstei:shorturl:update # Update the long url associated with a token
+    php app/console fabstei:shorturl:remove # Remove a redirection
+    php app/console fabstei:shorturl:list   # Get a list of all stored redirections
+
+    php app/console fabstei:token:codeset   # Get the codeset used to generate tokens
+    php app/console fabstei:token:encode    # Calculate a token from an integer
+    php app/console fabstei:token:decode    # Calculate the integer from a given token
+
 ## Tests
 
 The bundles ships with few unit tests and a ``phpunit.xml.dist`` file.
@@ -48,7 +87,6 @@ The bundles ships with few unit tests and a ``phpunit.xml.dist`` file.
 ## TODO
 
 - Add proper tests
-- Add usage documentation
 - Refactor to gain more flexibility (Decouple dependencies, f.e. the User class)
 - Improve general code quality
 
