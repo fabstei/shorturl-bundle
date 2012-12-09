@@ -39,17 +39,19 @@ Create a User class implementing the Userinterface and configure it in your conf
             resolve_target_entities:
                 Fabstei\ShorturlBundle\Model\UserInterface: Acme\Bundle\TestBundle\Entity\User #Your custom class
 
-Import the routes:
+Import the routes from your routing.yml:
 
     # Redirection from short to long urls
     redirect:
         resource: "@FabsteiShorturlBundle/Resources/config/routing/redirect.yml"
-        # Set an optional [hostname pattern](http://symfony.com/doc/master/components/routing/hostname_pattern.html) to match (new in Symfony 2.2)
         #hostname_pattern: example.com
 
     # Shorturl management
     shorturl:
         resource: "@FabsteiShorturlBundle/Resources/config/routing/url.yml"
+
+The optional [hostname pattern](http://symfony.com/doc/master/components/routing/hostname_pattern.html) (new in Symfony 2.2) allows you to use a seperate domain for your short urls.
+
 
 ## Configuration
 
@@ -61,10 +63,12 @@ The bundle provides sensible default values but one might want to customize the 
 ## Usage
 
 The bundle comes with two services:
-* fabstei_shorturl.tokenizer to generate tokens to use as short urls (such as example.com/a3x)
-* fabstei_shorturl.manager   to manage redirections (store long urls and their associated token)
+* [fabstei_shorturl.tokenizer](https://github.com/fabstei/shorturl-bundle/blob/master/Service/TokenizerInterface.php) to generate tokens to use as short urls (such as example.com/a3x)
+* [fabstei_shorturl.manager](https://github.com/fabstei/shorturl-bundle/blob/master/Model/UrlManagerInterface.php)   to manage redirections (store long urls and their associated token)
 
-It also provides a controller to handle redirections as well as a controller, views and forms to manage the redirections.
+It also provides a controller to handle redirections as well as a controller, views and forms to manage the redirections (by default accessible from /url-manager).
+Custom shorturls can be used to replace the default tokens (calculated from the redirection id).
+Furthermore, you may use `_locale` anywhere in the long urls you store, which is replaced by the current requests locale on redirection.
 
 Both services are also accessible via cli commands:
 
