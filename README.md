@@ -39,6 +39,8 @@ Create a User class implementing the Userinterface and configure it in your conf
             resolve_target_entities:
                 Fabstei\ShorturlBundle\Model\UserInterface: Acme\Bundle\TestBundle\Entity\User #Your custom class
 
+Update your doctrine database schema (`doctrine:schema:update --force`)
+
 Import the routes from your routing.yml:
 
     # Redirection from short to long urls
