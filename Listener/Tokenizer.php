@@ -9,7 +9,7 @@ use Fabstei\ShorturlBundle\Service\Token;
 class Tokenizer
 {
     /**
-     * @var Router $tokenizer
+     * @var Tokenizer $tokenizer
      */
     private $tokenizer;
 
