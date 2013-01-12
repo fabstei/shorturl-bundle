@@ -19,7 +19,7 @@ Using Composer, add to ``composer.json``:
 
     {
         "require": {
-            "fabstei/shorturl-bundle": "dev-master"
+            "fabstei/shorturl-bundle": "0.1.0"
         }
     }
 
