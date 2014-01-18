@@ -81,28 +81,4 @@ class Token implements TokenizerInterface
     {
         return bcmul($x, '1', 0);
     }
-
-    /**
-     * Implementing Ceil
-     * @param $x   Integer
-     * See http://snook.ca/archives/php/url-shortener#c63597 for Travell Perkins fix
-     */
-    private function bcCeil($x)
-    {
-        $floor = bcFloor($x);
-
-        return bcadd($floor, ceil(bcsub($x, $floor)));
-    }
-
-    /**
-     * Implementing Round
-     * @param $x   Integer
-     * See http://snook.ca/archives/php/url-shortener#c63597 for Travell Perkins fix
-     */
-    private function bcRound($x)
-    {
-        $floor = bcFloor($x);
-
-        return bcadd($floor, round(bcsub($x, $floor)));
-    }
 }
