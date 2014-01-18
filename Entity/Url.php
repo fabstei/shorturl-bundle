@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 use Fabstei\ShorturlBundle\Model\UrlInterface;
-use Fabstei\ShorturlBundle\Model\UserInterface;
 
 /**
  * Fabstei\ShorturlBundle\Entity\Url

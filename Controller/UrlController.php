@@ -23,7 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 use Doctrine\ORM\EntityManager;
 
-use Fabstei\ShorturlBundle\Model\UrlInterface;
 use Fabstei\ShorturlBundle\Model\UrlManagerInterface;
 use Fabstei\ShorturlBundle\Form\UrlType;
 

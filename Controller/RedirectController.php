@@ -10,7 +10,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 use Doctrine\ORM\EntityManager;
 
-use Fabstei\ShorturlBundle\Model\UrlInterface;
 use Fabstei\ShorturlBundle\Model\UrlManagerInterface;
 
 class RedirectController
