@@ -1,6 +1,8 @@
 # Provides short urls for your Symfony2 Project.
 
-*By Fabian Steiner*
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/a6eff1c0-40bd-42a6-984f-bc38d642d9f5/small.png)](https://insight.sensiolabs.com/projects/a6eff1c0-40bd-42a6-984f-bc38d642d9f5)
+
+[![Build Status](https://secure.travis-ci.org/fabstei/shorturl-bundle.png)](http://travis-ci.org/fabstei/shorturl-bundle)
 
 > Note: This bundle is under development. Things will change and might break. [Feedback](https://github.com/fabstei/shorturl-bundle/issues) is very welcome!
 
@@ -19,7 +21,7 @@ Using Composer, add to ``composer.json``:
 
     {
         "require": {
-            "fabstei/shorturl-bundle": "0.1.0"
+            "fabstei/shorturl-bundle": "0.2.0"
         }
     }
 
@@ -78,11 +80,6 @@ Both services are also accessible via cli commands:
     php app/console fabstei:token:encode    # Calculate a token from an integer
     php app/console fabstei:token:decode    # Calculate the integer from a given token
 
-## Tests
-
-The bundles ships with few unit tests and a ``phpunit.xml.dist`` file.
-
-[![Build Status](https://secure.travis-ci.org/fabstei/shorturl-bundle.png)](http://travis-ci.org/fabstei/shorturl-bundle)
 
 ## TODO
 
