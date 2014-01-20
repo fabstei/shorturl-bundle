@@ -32,13 +32,6 @@ Add the bundle to your AppKernel.php:
     new Fabstei\ShorturlBundle\FabsteiShorturlBundle(),
 
 
-Create a User class implementing the Userinterface and configure it in your config.yml:
-
-    doctrine:
-        orm:
-            resolve_target_entities:
-                Fabstei\ShorturlBundle\Model\UserInterface: Acme\Bundle\TestBundle\Entity\User #Your custom class
-
 Update your doctrine database schema (`doctrine:schema:update --force`)
 
 Import the routes from your routing.yml:
@@ -47,6 +40,7 @@ Import the routes from your routing.yml:
     redirect:
         resource: "@FabsteiShorturlBundle/Resources/config/routing/redirect.yml"
         #hostname_pattern: example.com
+        #prefix: /shorturls
 
     # Shorturl management
     shorturl:
@@ -93,7 +87,6 @@ The bundles ships with few unit tests and a ``phpunit.xml.dist`` file.
 ## TODO
 
 - Add proper tests
-- Refactor to gain more flexibility (Decouple dependencies, f.e. the User class)
 - Improve general code quality
 
 ## Dependencies
