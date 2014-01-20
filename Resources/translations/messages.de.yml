@@ -1,0 +1,19 @@
+fabstei_shorturl.actions: Aktionen
+fabstei_shorturl.add: Weiterleitung hinzufügen
+fabstei_shorturl.back-to-redirects: Zurück zur Liste
+fabstei_shorturl.createdby: Erstellt durch
+fabstei_shorturl.createdon: Erstellt am
+fabstei_shorturl.delete: Löschen
+fabstei_shorturl.edit: Bearbeiten
+fabstei_shorturl.entity_404: Das gesuchte Objekt konnte nicht gefunden werden
+fabstei_shorturl.id: Id
+fabstei_shorturl.redirect.404-url_token_id: Die Adresse konnte nicht gefunden werden
+fabstei_shorturl.redirection.add: Weiterleitung hinzufügen
+fabstei_shorturl.redirection.added: Weiterleitung hinzugefügt
+fabstei_shorturl.redirection.deleted: Weiterleitung gelöscht
+fabstei_shorturl.redirection.updated: Weiterleitung aktualisiert
+fabstei_shorturl.redirections.none: Es wurden noch keine Weiterleitungen erstellt
+fabstei_shorturl.save: Speichern
+fabstei_shorturl.show: Anzeigen
+fabstei_shorturl.targeturl: Zieladresse
+fabstei_shorturl.token: Token

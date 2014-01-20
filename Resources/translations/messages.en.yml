@@ -1,0 +1,20 @@
+fabstei_shorturl.actions: Actions
+fabstei_shorturl.add: Add redirection
+fabstei_shorturl.back-to-redirects: Back to the list
+fabstei_shorturl.createdby: Created by
+fabstei_shorturl.createdon: Created on
+fabstei_shorturl.delete: Delete
+fabstei_shorturl.edit: Edit
+fabstei_shorturl.entity_404: The object could not be found
+fabstei_shorturl.id: Id
+fabstei_shorturl.redirect.404-url_token_id: The URL could not be found
+fabstei_shorturl.redirection.add: Add redirection
+fabstei_shorturl.redirection.added: Redirection added
+fabstei_shorturl.redirection.deleted: Redirection deleted
+fabstei_shorturl.redirection.updated: Redirection updated
+fabstei_shorturl.redirections.none: There are no redirections stored, yet
+fabstei_shorturl.save: Save
+fabstei_shorturl.show: Show
+fabstei_shorturl.targeturl: Target URL
+fabstei_shorturl.token: Token
+
