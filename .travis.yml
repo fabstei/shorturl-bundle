@@ -5,9 +5,8 @@ php:
   - 5.4
   
 env:
-  - SYMFONY_VERSION=2.1.*
-  - SYMFONY_VERSION=2.2.*
-  
+  - SYMFONY_VERSION=2.4.*
+
 before_script:
   - composer require symfony/framework-bundle:${SYMFONY_VERSION}
   
@@ -18,4 +17,4 @@ after_success:
 
 notifications:
   email:
-    - fab.steiner@gmail.com
+    - email@fabiansteiner.com
