@@ -42,20 +42,6 @@ class Url implements UrlInterface
      */
     private $url;
 
-    /**
-     * @var datetime $datetime
-     *
-     * @ORM\Column(name="datetime", type="datetime")
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $datetime;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Fabstei\ShorturlBundle\Model\UserInterface", inversedBy="urls")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    protected $user;
-
     public function __tostring()
     {
         return 'Fabstei\ShorturlBundle\Entity\Url';
@@ -117,49 +103,4 @@ class Url implements UrlInterface
         return $this->url;
     }
 
-    /**
-     * Set datetime
-     *
-     * @param  datetime $datetime
-     * @return this
-     */
-    public function setDatetime($datetime)
-    {
-        $this->datetime = $datetime;
-
-        return $this;
-    }
-
-    /**
-     * Get datetime
-     *
-     * @return datetime
-     */
-    public function getDatetime()
-    {
-        return $this->datetime;
-    }
-
-    /**
-     * Set user
-     *
-     * @param  Fabstei\ShorturlBundle\Model\UserInterface $user
-     * @return this
-     */
-    public function setUser($user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return Fabstei\ShorturlBundle\Model\UserInterface
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

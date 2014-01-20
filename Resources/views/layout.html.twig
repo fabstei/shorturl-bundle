@@ -4,11 +4,14 @@
         <meta charset="UTF-8" />
     </head>
     <body>
-        {% for key, message in app.session.getFlashes() %}
-        <div class="{{ key }}">
-            <strong>{{key}}</strong>: {{ message|trans({}, 'FabsteiShorturlBundle') }}
-        </div>
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="{{ type }}">
+                    <strong>{{type}}</strong>: {{ message|trans({}, 'FabsteiShorturlBundle') }}
+                </div>
+            {% endfor %}
         {% endfor %}
+
         <div>
             {% block content %}
             {% endblock content %}

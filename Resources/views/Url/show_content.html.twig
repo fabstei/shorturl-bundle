@@ -14,14 +14,6 @@
             <td><a href="{{ entity.url }}">{{ entity.url }}</a></td>
         </tr>
         {% endif %}
-        <tr>
-            <th>{% trans %}fabstei_shorturl.createdby{% endtrans %}</th>
-            <td>{{ entity.user }}</td>
-        </tr>
-        <tr>
-            <th>{% trans %}fabstei_shorturl.createdon{% endtrans %}</th>
-            <td>{{ entity.datetime|date('Y-m-d H:i:s') }}</td>
-        </tr>
     </tbody>
 </table>
 

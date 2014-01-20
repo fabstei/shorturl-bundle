@@ -52,11 +52,6 @@ class Configuration implements ConfigurationInterface
                     ->info('Service which encodes and decodes uniqe shorturl tokens.')
                     ->example('Fabstei\ShorturlBundle\Service\Token')
                     ->end()
-                ->scalarNode('role_admin')
-                    ->defaultValue('ROLE_ADMIN')
-                    ->info('Role required to edit and delete entities created by others.')
-                    ->example('ROLE_ADMIN')
-                    ->end()
         ->end();
 
         return $treeBuilder;

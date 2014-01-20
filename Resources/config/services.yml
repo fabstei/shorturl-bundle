@@ -1,7 +1,7 @@
 services:
     fabstei_shorturl.url:
         class: %fabstei_shorturl.url_controller%
-        arguments: [@request, @session, @router, @doctrine.orm.entity_manager, @fabstei_shorturl.manager, @templating, @form.factory, @translator, @security.context, @security.acl.provider, %fabstei_shorturl.role_admin%]
+        arguments: [@request, @session, @router, @doctrine.orm.entity_manager, @fabstei_shorturl.manager, @templating, @form.factory, @translator]
         scope: request
 
     fabstei_shorturl.manager:

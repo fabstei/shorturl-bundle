@@ -12,13 +12,6 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
-use Symfony\Component\Security\Core\SecurityContextInterface;
-use Symfony\Component\Security\Acl\Model\AclProviderInterface;
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Domain\RoleSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
-
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 
 use Doctrine\ORM\EntityManager;
@@ -40,9 +33,6 @@ class UrlController
     protected $template;
     protected $form;
     protected $translator;
-    protected $security;
-    protected $aclprovider;
-    protected $adminRole;
 
     public function __construct(Request                   $request,
                                 SessionInterface          $session,
@@ -51,10 +41,7 @@ class UrlController
                                 UrlManagerInterface       $urlManager,
                                 EngineInterface           $templateEngine,
                                 FormFactoryInterface      $formFactory,
-                                TranslatorInterface       $translator,
-                                SecurityContextInterface  $securityContext,
-                                AclProviderInterface      $aclprovider,
-                                                          $adminRole
+                                TranslatorInterface       $translator
                                 )
     {
         $this->request     = $request;
@@ -65,9 +52,6 @@ class UrlController
         $this->template    = $templateEngine;
         $this->form        = $formFactory;
         $this->translator  = $translator;
-        $this->security    = $securityContext;
-        $this->aclprovider = $aclprovider;
-        $this->adminRole   = $adminRole;
     }
 
     /**
@@ -99,12 +83,6 @@ class UrlController
             throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.entity_404'));
         }
 
-        if (!$this->security->isGranted('EDIT', $entity)) {
-            $this->session->getFlashBag()->add('error', $this->translator->trans('fabstei_shorturl.display.permission'));
-
-            return new RedirectResponse($this->router->generate('fabstei_shorturl_url'));
-        }
-
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->template->renderResponse('FabsteiShorturlBundle:Url:show.html.twig',
@@ -123,29 +101,11 @@ class UrlController
     {
         $entity  = $this->manager->createUrl();
         $form    = $this->form->create(new UrlType(), $entity);
-        $form->bindRequest($this->request);
+        $form->handleRequest($this->request);
 
         if ($form->isValid()) {
 
-            $user = $this->security->getToken()->getUser();
-
-            $entity->setUser($user);
-
             $this->manager->updateUrl($entity);
-
-            // creating the ACL
-            $aclProvider = $this->aclprovider;
-            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-            $acl = $aclProvider->createAcl($objectIdentity);
-
-            // retrieving the security identity of the currently logged-in user
-            $userSecurityIdentity = UserSecurityIdentity::fromAccount($user);
-            $adminSecurityIdentity = new RoleSecurityIdentity($this->adminRole);
-
-            // grant owner access
-            $acl->insertObjectAce($userSecurityIdentity, MaskBuilder::MASK_EDIT);
-            $acl->insertObjectAce($adminSecurityIdentity, MaskBuilder::MASK_OWNER);
-            $aclProvider->updateAcl($acl);
 
             $this->session->getFlashBag()->add('success', $this->translator->trans('fabstei_shorturl.redirection.added'));
 
@@ -172,12 +132,6 @@ class UrlController
             throw new NotFoundHttpException('Unable to find Url entity.');
         }
 
-        if (!$this->security->isGranted('EDIT', $entity)) {
-            $this->session->getFlashBag()->add('error', $this->translator->trans('fabstei_shorturl.edit.permission'));
-
-            return new RedirectResponse($this->router->generate('fabstei_shorturl_url'));
-        }
-
         $editForm = $this->form->create(new UrlType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -202,18 +156,12 @@ class UrlController
             throw new NotFoundHttpException('Unable to find Url entity.');
         }
 
-        if (!$this->security->isGranted('EDIT', $entity)) {
-            $this->session->getFlashBag()->add('error', $this->translator->trans('fabstei_shorturl.edit.permission'));
-
-            return new RedirectResponse($this->router->generate('fabstei_shorturl_url'));
-        }
-
         $editForm   = $this->form->create(new UrlType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        $editForm->bindRequest($this->request);
+        $editForm->handleRequest($this->request);
 
-        if ($editForm->isValid()) {
+        if($editForm->isValid()) {
             $this->manager->updateUrl($entity);
 
             $this->session->getFlashBag()->add('success', $this->translator->trans('fabstei_shorturl.redirection.updated'));
@@ -240,12 +188,6 @@ class UrlController
 
         if (!$entity) {
             throw new NotFoundHttpException($this->translator->trans('fabstei_shorturl.entity_404'));
-        }
-
-        if (!$this->security->isGranted('DELETE', $entity)) {
-            $this->session->getFlashBag()->add('error', $this->translator->trans('fabstei_shorturl.delete.permission'));
-
-            return new RedirectResponse($this->router->generate('fabstei_shorturl_url'));
         }
 
         $this->manager->deleteUrl($entity);

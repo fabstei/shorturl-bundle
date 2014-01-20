@@ -5,8 +5,6 @@
                 <th>{% trans %}fabstei_shorturl.id{% endtrans %}</th>
                 <th>{% trans %}fabstei_shorturl.token{% endtrans %}</th>
                 <th>{% trans %}fabstei_shorturl.targeturl{% endtrans %}</th>
-                <th>{% trans %}fabstei_shorturl.createdon{% endtrans %}</th>
-                <th>{% trans %}fabstei_shorturl.createdby{% endtrans %}</th>
                 <th>{% trans %}fabstei_shorturl.actions{% endtrans %}</th>
             </tr>
         </thead>
@@ -16,8 +14,6 @@
                 <td>{{ entity.id }}</td>
                 <td><a href="{{ path('fabstei_shorturl_url_show', { 'id': entity.id }) }}">{{ entity.token }}</a></td>
                 <td>{% if entity.url is not null %}{{ entity.url }}{% else %}none{% endif %}</td>
-                <td>{{ entity.datetime|date("m/d/Y") }}</td>
-                <td>{{ entity.user }}</td>
                 <td>
                     <a href="{{ path('fabstei_shorturl_url_show', { 'id': entity.id }) }}">{% trans %}fabstei_shorturl.show{% endtrans %}</a>
                     <a href="{{ path('fabstei_shorturl_url_edit', { 'id': entity.id }) }}">{% trans %}fabstei_shorturl.edit{% endtrans %}</a>

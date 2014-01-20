@@ -47,35 +47,4 @@ interface UrlInterface
      * @return string
      */
     public function getUrl();
-
-    /**
-     * Set datetime
-     *
-     * @param  datetime $datetime
-     * @return this
-     */
-    public function setDatetime($datetime);
-
-    /**
-     * Get datetime
-     *
-     * @return datetime
-     */
-    public function getDatetime();
-
-    /**
-     * Set user
-     *
-     * @param  Fabstei\ShorturlBundle\Model\UserInterface $user
-     * @return this
-     */
-    public function setUser($user = null);
-
-    /**
-     * Get user
-     *
-     * @return Fabstei\ShorturlBundle\Entity\User
-     */
-    public function getUser();
-
 }
