@@ -30,7 +30,7 @@ class RemoveUrlCommand extends ContainerAwareCommand
         $manager = $this->getContainer()->get('fabstei_shorturl.manager');
         $deleted = $manager->removeUrl($input->getArgument('token'));
         
-        if($deleted == true) {
+        if($deleted === true) {
             $output->writeln('<info>Shorturl "'.$input->getArgument('token').'" removed</info>');
         } else {
             $output->writeln('<error>Shorturl "'.$input->getArgument('token').'" could not be found</error>');

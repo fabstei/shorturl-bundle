@@ -50,19 +50,19 @@ class UpdateUrlCommand extends ContainerAwareCommand
         }
         
         if(isset($updated_longurl)) {
-            if($updated_longurl == true) {
+            if($updated_longurl === true) {
                 $output->writeln('<info>Shorturl "'.$input->getArgument('token').' updated. New Url"</info>: '.$longurl);
             }
         }
         
         if(isset($updated_token)) {        
-            if($updated_token == true) {
+            if($updated_token === true) {
                 $output->writeln('<info>Shorturl "'.$input->getArgument('token').' updated. New Token"</info>: '.$newToken);
             }
         }
         
         if(isset($updated_longurl) && isset($updated_token)) {
-            if($updated_longurl && $updated_token == false) {
+            if($updated_longurl && $updated_token === false) {
             $output->writeln('<error>Redirection could not be found.</error>');
             }
         }
