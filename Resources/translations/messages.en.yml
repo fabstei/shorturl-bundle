@@ -17,4 +17,3 @@ fabstei_shorturl.save: Save
 fabstei_shorturl.show: Show
 fabstei_shorturl.targeturl: Target URL
 fabstei_shorturl.token: Token
-
