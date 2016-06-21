@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Doctrine\ORM\EntityManager;
 
 use Fabstei\ShorturlBundle\Model\UrlManagerInterface;
-use Fabstei\ShorturlBundle\Form\UrlType;
+use Fabstei\ShorturlBundle\Form\Type\UrlType;
 
 /**
  * Url controller.
